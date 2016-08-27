@@ -6,12 +6,13 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
+REPO_DOMAIN=rkt.mrgnr.io
 TOR_VERSION=0.2.8.6
 
 acbuild --debug begin
 trap "{ acbuild --debug end && exit 1; }" EXIT
 
-acbuild --debug set-name mrgnr.io/tor-base
+acbuild --debug set-name $REPO_DOMAIN/tor-base
 acbuild --debug dep add quay.io/coreos/alpine-sh
 
 # Install prerequisites for building tor

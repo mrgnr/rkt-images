@@ -6,10 +6,13 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-acbuild --debug begin ../tor-base/tor-base.aci
+REPO_DOMAIN=rkt.mrgnr.io
+
+acbuild --debug begin
 trap "{ acbuild --debug end && exit 1; }" EXIT
 
-acbuild --debug set-name mrgnr.io/ooni
+acbuild --debug set-name $REPO_DOMAIN/ooni
+acbuild --debug dep add $REPO_DOMAIN/tor-base
 
 acbuild --debug run -- apk update
 acbuild --debug run -- apk add bash build-base geoip geoip-dev libdnet libdnet-dev libffi \

@@ -20,7 +20,7 @@ $ sudo rkt --insecure-options=image fetch ./tor-base.aci
 
 $ sudo rkt image list
 ID                  NAME                    SIZE    IMPORT TIME     LAST USED
-sha512-9143900eeb0b mrgnr.io/tor-base       605MiB  22 seconds ago  11 seconds ago
+sha512-9143900eeb0b rkt.mrgnr.io/tor-base   605MiB  22 seconds ago  11 seconds ago
 ```
 
 Note the use of the `--insecure-options=image` flag, which is used to disable image signature

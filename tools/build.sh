@@ -6,10 +6,12 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
+REPO_DOMAIN=rkt.mrgnr.io
+
 acbuild --debug begin
 trap "{ acbuild --debug end && exit 1; }" EXIT
 
-acbuild --debug set-name mrgnr.io/tools
+acbuild --debug set-name $REPO_DOMAIN/tools
 acbuild --debug dep add quay.io/coreos/alpine-sh
 
 acbuild --debug run -- apk update
