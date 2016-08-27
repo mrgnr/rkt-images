@@ -13,7 +13,8 @@ acbuild --debug set-name mrgnr.io/ooni
 
 acbuild --debug run -- apk update
 acbuild --debug run -- apk add bash build-base geoip geoip-dev libdnet libdnet-dev libffi \
-    libffi-dev libpcap libpcap-dev openssl openssl-dev py-pip python python-dev
+    libffi-dev libpcap libpcap-dev openssl openssl-dev py-pip python python-dev tcpdump
+acbuild --debug run -- mv /usr/sbin/tcpdump /usr/bin  # workaround for unknown issue.. maybe need to set net_admin capability?
 acbuild --debug run -- pip install ooniprobe
 
 acbuild --debug set-exec -- /usr/bin/ooniprobe
