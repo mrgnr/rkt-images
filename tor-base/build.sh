@@ -7,12 +7,15 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 REPO_DOMAIN=rkt.mrgnr.io
+COMMIT=$(git rev-parse --verify HEAD)
 TOR_VERSION=0.2.8.6
 
 acbuild --debug begin
 trap "{ acbuild --debug end && exit 1; }" EXIT
 
 acbuild --debug set-name $REPO_DOMAIN/tor-base
+acbuild --debug label add commit $COMMIT
+acbuild --debug label add version $TOR_VERSION
 acbuild --debug dep add quay.io/coreos/alpine-sh
 
 # Install prerequisites for building tor

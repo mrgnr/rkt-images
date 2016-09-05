@@ -7,12 +7,16 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 REPO_DOMAIN=rkt.mrgnr.io
+COMMIT=$(git rev-parse --verify HEAD)
+TOR_VERSION=0.2.8.6
 
 acbuild --debug begin
 trap "{ acbuild --debug end && exit 1; }" EXIT
 
 acbuild --debug set-name $REPO_DOMAIN/tor
-acbuild --debug dep add $REPO_DOMAIN/tor-base
+acbuild --debug label add commit $COMMIT
+acbuild --debug label add version $TOR_VERSION
+acbuild --debug dep add $REPO_DOMAIN/tor-base:$TOR_VERSION
 
 acbuild --debug copy -- ./tor-service-defaults-torrc /usr/share/tor/tor-service-defaults-torrc
 acbuild --debug run -- chown -R tor:tor /usr/share/tor/tor-service-defaults-torrc
@@ -24,6 +28,7 @@ acbuild --debug port add dirport tcp 9030
 acbuild --debug port add transport tcp 9040
 acbuild --debug port add socksport tcp 9050
 acbuild --debug mount add torrc /etc/tor/torrc --read-only
+acbuild --debug mount add localtime /etc/localtime --read-only
 acbuild --debug set-exec -- /usr/local/bin/tor --defaults-torrc /usr/share/tor/tor-service-defaults-torrc -f /etc/tor/torrc
 
 acbuild --debug write --overwrite tor.aci
