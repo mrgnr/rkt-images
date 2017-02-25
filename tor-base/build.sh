@@ -8,7 +8,7 @@ fi
 
 REPO_DOMAIN=rkt.mrgnr.io
 COMMIT=$(git rev-parse --verify HEAD)
-TOR_VERSION=0.2.8.6
+TOR_VERSION=0.2.9.9
 
 acbuild --debug begin
 trap "{ acbuild --debug end && exit 1; }" EXIT
@@ -24,7 +24,7 @@ acbuild --debug run -- apk add bash gcc gpgme libc-dev libevent libevent-dev mak
 
 # Fetch tor source
 # https://www.torproject.org/docs/signing-keys.html.en
-acbuild --debug run -- gpg --keyserver keys.mozilla.org --recv-keys 0xB35BF85BF19489D04E28C33C21194EBB165733EA
+acbuild --debug run -- gpg --keyserver keys.mozilla.org --recv-keys 0x2133BC600AB133E1D826D173FE43009C4607B1FB
 acbuild --debug run -- wget https://www.torproject.org/dist/tor-$TOR_VERSION.tar.gz
 acbuild --debug run -- wget https://www.torproject.org/dist/tor-$TOR_VERSION.tar.gz.asc
 acbuild --debug run -- gpg --verify tor-$TOR_VERSION.tar.gz.asc
