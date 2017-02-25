@@ -1,9 +1,22 @@
 [Unit]
 Description=Tor
+After=network.target nss-lookup.target
 
 [Service]
 Slice=machine.slice
-ExecStart=/usr/bin/rkt run rkt.mrgnr.io/tor --volume=torrc,kind=host,source=/etc/tor/torrc --volume=localtime,kind=host,source=/etc/localtime --dns=8.8.8.8 --dns=8.8.4.4 --port=orport:9001 --private-users --no-overlay --caps-retain=CAP_SETUID,CAP_SETGID,CAP_NET_BIND_SERVICE
+ExecStart=/usr/bin/rkt run rkt.mrgnr.io/tor \
+    --volume=torrc,kind=host,source=/etc/tor/torrc \
+    --volume=localtime,kind=host,source=/etc/localtime \
+    --dns=8.8.8.8 --dns=8.8.4.4 \
+    --port=orport:9001 \
+    --private-users --no-overlay \
+    --caps-retain=CAP_SETUID,CAP_SETGID,CAP_NET_BIND_SERVICE
+ExecReload=/bin/sh -c "/usr/bin/rkt enter $(/usr/bin/rkt list --no-legend | grep running | grep tor | cut -f1) pkill -HUP tor"
 KillMode=mixed
 Restart=always
 NoNewPrivileges=yes
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
