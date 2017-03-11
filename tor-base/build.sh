@@ -35,7 +35,7 @@ acbuild --debug run -- /bin/bash -c "cd tor-$TOR_VERSION && ./configure && make 
 acbuild --debug run -- rm -rf tor-$TOR_VERSION
 acbuild --debug run -- rm tor-$TOR_VERSION.tar.gz tor-$TOR_VERSION.tar.gz.asc
 acbuild --debug run -- rm -rf /var/cache/apk/*
-acbuild --debug run -- adduser -D -g tor -s /sbin/nologin tor
+acbuild --debug run -- adduser -u 9001 -D -g tor -s /sbin/nologin tor
 acbuild --debug run -- mkdir -p /etc/tor
 acbuild --debug run -- mkdir -p /usr/share/tor
 acbuild --debug run -- mkdir -p /var/lib/tor
