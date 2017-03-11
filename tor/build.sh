@@ -27,6 +27,7 @@ acbuild --debug port add orport tcp 9001
 acbuild --debug port add dirport tcp 9030
 acbuild --debug port add transport tcp 9040
 acbuild --debug port add socksport tcp 9050
+acbuild --debug mount add data /var/lib/tor/
 acbuild --debug mount add torrc /etc/tor/torrc --read-only
 acbuild --debug mount add localtime /etc/localtime --read-only
 acbuild --debug set-exec -- /usr/local/bin/tor --defaults-torrc /usr/share/tor/tor-service-defaults-torrc -f /etc/tor/torrc
