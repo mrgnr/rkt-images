@@ -41,6 +41,6 @@ acbuild --debug run -- rm -rf /var/cache/apk/*
 
 acbuild --debug mount add config /etc/onionbalance/
 acbuild --debug mount add localtime /etc/localtime --read-only
-acbuild --debug set-exec -- /bin/sh -c /bin/sh
+acbuild --debug set-exec -- onionbalance -c /etc/onionbalance/config.yaml
 
 acbuild --debug write --overwrite onionbalance.aci
