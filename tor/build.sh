@@ -8,7 +8,7 @@ fi
 
 REPO_DOMAIN=rkt.mrgnr.io
 COMMIT=$(git rev-parse --verify HEAD)
-TOR_VERSION=0.2.9.9
+TOR_VERSION=0.2.9.10
 
 acbuild --debug begin
 trap "{ acbuild --debug end && exit 1; }" EXIT
