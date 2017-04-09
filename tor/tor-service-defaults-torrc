@@ -1,0 +1,11 @@
+DataDirectory /var/lib/tor
+PidFile /var/run/tor/tor.pid
+
+ControlSocket /var/run/tor/control
+ControlSocketsGroupWritable 1
+
+CookieAuthentication 1
+CookieAuthFileGroupReadable 1
+CookieAuthFile /var/run/tor/control.authcookie
+
+Log notice file /var/log/tor/log

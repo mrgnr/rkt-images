@@ -30,6 +30,9 @@ acbuild --debug port add socksport tcp 9050
 acbuild --debug mount add data /var/lib/tor/
 acbuild --debug mount add torrc /etc/tor/torrc --read-only
 acbuild --debug mount add localtime /etc/localtime --read-only
+acbuild --debug set-user tor
+acbuild --debug set-group tor
+acbuild --debug isolator add "os/linux/capabilities-retain-set" capabilities.json
 acbuild --debug set-exec -- /usr/local/bin/tor --defaults-torrc /usr/share/tor/tor-service-defaults-torrc -f /etc/tor/torrc
 
 acbuild --debug write --overwrite tor.aci

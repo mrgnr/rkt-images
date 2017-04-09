@@ -52,6 +52,8 @@ acbuild --debug run -- chmod -R 2700 /var/lib/tor
 acbuild --debug run -- chmod -R 2750 /var/run/tor
 acbuild --debug run -- chmod -R 2750 /var/log/tor
 
+acbuild --debug set-user tor
+acbuild --debug set-group tor
 acbuild --debug set-exec -- /bin/sh -c /bin/sh
 
 acbuild --debug write --overwrite tor-base.aci
